@@ -10,10 +10,10 @@ const darkTheme = createMuiTheme({
     },
   });
 
-export default class FindEstacao extends Component {
+export default class StationFind extends Component {
     state = {
-        estacoes: [] ,
-        dados: []
+        station: [] ,
+        data: []
     }
 
     componentDidMount(){
@@ -23,21 +23,21 @@ export default class FindEstacao extends Component {
     loadList = async () => {
         const { id } = this.props.match.params;
         const response = await api.get(`/estacoes/find/${id}`);
-        this.setState({ estacoes: response.data, dados: response.data.dados});  
+        this.setState({ station: response.data, data: response.data.dados});  
     }
 
-    async deleteEstacao(id){
+    async DeleteStation(id){
         await api.delete(`/estacoes/delete/${id}`);
         window.location.href = "/"
     }
 
-    async deleteDados(id){
+    async DeleteData(id){
         await api.delete(`/dados/delete/${id}`);
         window.location.reload();
     }
 
     render(){
-        const { estacoes, dados } = this.state;
+        const { station, data } = this.state;
         
         return (
         <div>    
@@ -57,14 +57,14 @@ export default class FindEstacao extends Component {
                 </TableRow>
                 </TableHead>
                 <TableBody>
-                    <TableRow key={estacoes.id}>
-                    <TableCell align="center">{estacoes.id}</TableCell>    
-                    <TableCell align="center">{estacoes.serial}</TableCell>
-                    <TableCell align="center">{estacoes.lat}</TableCell>
-                    <TableCell align="center">{estacoes.lon}</TableCell>
-                    <TableCell align="center">{estacoes.nome}</TableCell>
-                    <TableCell align="right"><Button href={`/estacoes/update/${estacoes.id}`} variant="contained" size="small" color="primary">Atualizar</Button></TableCell>
-                    <TableCell align="right"><Button variant="contained" size="small" color="secondary" onClick={() => {this.deleteEstacao(estacoes.id)}}>Excluir</Button></TableCell>
+                    <TableRow key={station.id}>
+                    <TableCell align="center">{station.id}</TableCell>    
+                    <TableCell align="center">{station.serial}</TableCell>
+                    <TableCell align="center">{station.lat}</TableCell>
+                    <TableCell align="center">{station.lon}</TableCell>
+                    <TableCell align="center">{station.nome}</TableCell>
+                    <TableCell align="right"><Button href={`/estacoes/update/${station.id}`} variant="contained" size="small" color="primary">Atualizar</Button></TableCell>
+                    <TableCell align="right"><Button variant="contained" size="small" color="secondary" onClick={() => {this.DeleteStation(station.id)}}>Excluir</Button></TableCell>
                     </TableRow>
                 </TableBody>
             </Table>
@@ -84,20 +84,20 @@ export default class FindEstacao extends Component {
                     <TableCell align="center">Umidade</TableCell>
                     <TableCell align="center">Data</TableCell>
                     <TableCell align="center">Estação</TableCell>
-                    <TableCell align="center" colSpan={2}><Button variant="contained" size="small" color="primary" href={`/dados/create/${estacoes.id}`}>Inserir dados</Button></TableCell>
+                    <TableCell align="center" colSpan={2}><Button variant="contained" size="small" color="primary" href={`/dados/create/${station.id}`}>Inserir data</Button></TableCell>
                 </TableRow>
                 </TableHead>
                 <TableBody>
-                {dados.map((dados) => (
-                    <TableRow key={dados.id}>
-                    <TableCell align="center">{dados.id}</TableCell>    
-                    <TableCell align="center">{dados.temperatura}</TableCell>
-                    <TableCell align="center">{dados.velocidade_vento}</TableCell>
-                    <TableCell align="center">{dados.umidade}</TableCell>
-                    <TableCell align="center">{dados.data}</TableCell>
-                    <TableCell align="center">{dados.estacaoId}</TableCell>
-                    <TableCell align="right"><Button variant="contained" size="small" color="primary" href={`/dados/update/${dados.id}`}>Atualizar</Button></TableCell>
-                    <TableCell align="right"><Button variant="contained" size="small" color="secondary" onClick={() => {this.deleteDados(dados.id)}}>Excluir</Button></TableCell>
+                {data.map((data) => (
+                    <TableRow key={data.id}>
+                    <TableCell align="center">{data.id}</TableCell>    
+                    <TableCell align="center">{data.temperatura}</TableCell>
+                    <TableCell align="center">{data.velocidade_vento}</TableCell>
+                    <TableCell align="center">{data.umidade}</TableCell>
+                    <TableCell align="center">{data.data}</TableCell>
+                    <TableCell align="center">{data.estacaoId}</TableCell>
+                    <TableCell align="right"><Button variant="contained" size="small" color="primary" href={`/dados/update/${data.id}`}>Atualizar</Button></TableCell>
+                    <TableCell align="right"><Button variant="contained" size="small" color="secondary" onClick={() => {this.DeleteData(data.id)}}>Excluir</Button></TableCell>
                     </TableRow>
                 ))}
                 </TableBody>
