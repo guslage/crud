@@ -22,9 +22,7 @@ export default class FindEstacao extends Component {
 
     loadList = async () => {
         const { id } = this.props.match.params;
-        
         const response = await api.get(`/estacoes/find/${id}`);
-        //console.log(response.data)
         this.setState({ estacoes: response.data, dados: response.data.dados});  
     }
 
