@@ -22,7 +22,7 @@ export default class StationUpdate extends Component{
 
     loadList = async () => {
         const { id } = this.props.match.params;
-        const response = await api.get(`/estacoes/find/${id}`);
+        const response = await api.get(`/station/find/${id}`);
         this.setState({ station: response.data });         
     }
 

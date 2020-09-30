@@ -22,7 +22,7 @@ export default class DataUpdate extends Component {
 
     loadList = async () => {
         const { id } = this.props.match.params;
-        const response = await api.get(`/dados/find/${id}`);
+        const response = await api.get(`/data/find/${id}`);
         this.setState({ data: response.data[0] }); 
     }
 
@@ -73,7 +73,7 @@ export default class DataUpdate extends Component {
         const { id } = this.props.match.params;
         let req = this.state.data;
         
-        api.put(`/dados/update/${id}`, req, {
+        api.put(`/data/update/${id}`, req, {
             headers: {'content-type': 'application/json'}
         }).then(
             this.setState({redirect: true})
