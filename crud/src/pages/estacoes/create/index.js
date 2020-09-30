@@ -62,7 +62,7 @@ export default class StationCreate extends Component {
 
     handleSubmit = event => {
         let data = JSON.stringify(this.state.station);
-        api.post(`/estacoes/new`, data, {
+        api.post(`/station/new`, data, {
             headers: {'content-type': 'application/json'}
         }).then(
             this.setState({redirect: true})

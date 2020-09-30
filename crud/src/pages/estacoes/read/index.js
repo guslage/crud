@@ -20,7 +20,7 @@ export default class StationIndex extends Component {
     }
 
     loadList = async () => {
-        const response = await api.get('/estacoes/index');
+        const response = await api.get('/station/index');
         this.setState({ station: response.data });
     }
 

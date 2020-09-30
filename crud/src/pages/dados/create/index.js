@@ -67,7 +67,7 @@ export default class DataCreate extends Component {
     handleSubmit = event => {
         let req = JSON.stringify(this.state.data);
         
-        api.post(`/dados/new`, req, {
+        api.post(`/data/new`, req, {
             headers: {'content-type': 'application/json'}
         }).then(
             this.setState({redirect: true})

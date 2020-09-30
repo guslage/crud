@@ -22,23 +22,23 @@ export default class StationFind extends Component {
 
     loadList = async () => {
         const { id } = this.props.match.params;
-        const response = await api.get(`/estacoes/find/${id}`);
+        const response = await api.get(`/station/find/${id}`);
         this.setState({ station: response.data, data: response.data.dados});  
     }
 
     async DeleteStation(id){
-        await api.delete(`/estacoes/delete/${id}`);
+        await api.delete(`/station/delete/${id}`);
         window.location.href = "/"
     }
 
     async DeleteData(id){
-        await api.delete(`/dados/delete/${id}`);
+        await api.delete(`/data/delete/${id}`);
         window.location.reload();
     }
 
     render(){
         const { station, data } = this.state;
-        
+        console.log(station);
         return (
         <div>    
         <div className="MainContainer">{
