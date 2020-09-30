@@ -10,10 +10,9 @@ const darkTheme = createMuiTheme({
     },
 });
 
-
-export default class UpdateEstacao extends Component{
+export default class StationUpdate extends Component{
     state = {
-        estacoes: {},
+        station: {},
         redirect: false
     }    
 
@@ -23,14 +22,12 @@ export default class UpdateEstacao extends Component{
 
     loadList = async () => {
         const { id } = this.props.match.params;
-
         const response = await api.get(`/estacoes/find/${id}`);
-        console.log(response);
-        this.setState({ estacoes: response.data }); 
+        this.setState({ station: response.data });         
     }
 
     render(){
-        const { estacoes, redirect } = this.state;
+        const { station, redirect } = this.state;
         
         if(redirect){
             return window.location.href = `/`
@@ -40,16 +37,16 @@ export default class UpdateEstacao extends Component{
                 <ThemeProvider theme={darkTheme}>    
                 <form onSubmit={this.handleSubmit} autoComplete="off">
                     <div className="Text">
-                    <TextField id="serial" label="Número serial" variant="filled" value={estacoes.serial} fullWidth={true} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }}  />
+                    <TextField id="serial" label="Número serial" variant="filled" value={station.serial} fullWidth={true} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }}  />
                     </div>
                     <div className="Text">    
-                    <TextField id="lat" label="Latitude" variant="filled" value={estacoes.lat} fullWidth={true} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }}  />
+                    <TextField id="lat" label="Latitude" variant="filled" value={station.lat} fullWidth={true} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }}  />
                     </div>
                     <div className="Text">
-                    <TextField id="lon" label="Longitude" variant="filled" value={estacoes.lon} fullWidth={true} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }}  />
+                    <TextField id="lon" label="Longitude" variant="filled" value={station.lon} fullWidth={true} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }}  />
                     </div>
                     <div className="Text">
-                    <TextField id="nome" label="Nome" variant="filled" value={estacoes.nome} fullWidth={true} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }}  />
+                    <TextField id="nome" label="Nome" variant="filled" value={station.nome} fullWidth={true} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }}  />
                     </div>
 
                     <Button type="submit" variant="contained" color="primary">Atualizar</Button>
@@ -66,15 +63,15 @@ export default class UpdateEstacao extends Component{
         const value = target.value;
 
         this.setState(prevState => ({
-            estacoes: { ...prevState.estacoes, [name]: value }
+            station: { ...prevState.station, [name]: value }
         }))
     }
 
     handleSubmit = event => {
         const { id } = this.props.match.params;
-        let data = JSON.stringify(this.state.estacoes);
+        let data = JSON.stringify(this.state.station);
         
-        api.put(`/estacoes/update/${id}`, data, {
+        api.put(`/station/update/${id}`, data, {
             headers: {'content-type': 'application/json'}
         }).then(
             this.setState({redirect: true})
