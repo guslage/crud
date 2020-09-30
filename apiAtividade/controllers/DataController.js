@@ -17,7 +17,7 @@ module.exports = {
     async find(req, res) {
         await db.dados.findAll({ where: { id: req.params.id } })
         .then(find => res.send(find))
-        .catch(err => res.send(err))
+        .catch(res.send('Dado inválido ou inexistente!'))
     },
 
     async update(req, res) {
@@ -30,6 +30,6 @@ module.exports = {
     async delete(req, res) {
         await db.dados.destroy({ where: { id: req.params.id } })
         .then(res.send('ok'))
-        .catch(err => res.send(err))
+        .catch(res.send('Dado inválido ou inexistente!'))
     }
 }
