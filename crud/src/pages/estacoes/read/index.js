@@ -10,9 +10,9 @@ const darkTheme = createMuiTheme({
     },
   });
 
-export default class Estacoes extends Component {
+export default class StationIndex extends Component {
     state = {
-        estacoes: []
+        station: []
     }
 
     componentDidMount(){
@@ -21,11 +21,11 @@ export default class Estacoes extends Component {
 
     loadList = async () => {
         const response = await api.get('/estacoes/index');
-        this.setState({ estacoes: response.data });
+        this.setState({ station: response.data });
     }
 
     render(){
-        const { estacoes } = this.state;
+        const { station } = this.state;
 
         return (
         <div className="MainContainer">{
@@ -43,14 +43,14 @@ export default class Estacoes extends Component {
                 </TableRow>
                 </TableHead>
                 <TableBody>
-                {estacoes.map((estacoes) => (
-                    <TableRow key={estacoes.id}>
-                    <TableCell align="center">{estacoes.id}</TableCell>    
-                    <TableCell align="center">{estacoes.serial}</TableCell>
-                    <TableCell align="center">{estacoes.lat}</TableCell>
-                    <TableCell align="center">{estacoes.lon}</TableCell>
-                    <TableCell align="center">{estacoes.nome}</TableCell>
-                    <TableCell align="center"><Button variant="contained" size="small" color="primary" href={`/estacoes/find/${estacoes.id}`}>Acessar</Button></TableCell>
+                {station.map((station) => (
+                    <TableRow key={station.id}>
+                    <TableCell align="center">{station.id}</TableCell>    
+                    <TableCell align="center">{station.serial}</TableCell>
+                    <TableCell align="center">{station.lat}</TableCell>
+                    <TableCell align="center">{station.lon}</TableCell>
+                    <TableCell align="center">{station.nome}</TableCell>
+                    <TableCell align="center"><Button variant="contained" size="small" color="primary" href={`/estacoes/find/${station.id}`}>Acessar</Button></TableCell>
                     </TableRow>
                 ))}
                 </TableBody>

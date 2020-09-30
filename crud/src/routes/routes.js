@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
 
-import Estacoes from '../pages/estacoes/read/index';
+import StationIndex from '../pages/estacoes/read/index';
 import StationFind from '../pages/estacoes/read/findOne';
 import CreateEstacao from '../pages/estacoes/create/index';
 import StationUpdate from '../pages/estacoes/update/index';
@@ -12,7 +12,7 @@ import DataUpdate from '../pages/dados/update/index';
 const Routes = () => (
     <BrowserRouter>
         <Switch>
-            <Route exact path="/" component={Estacoes} />
+            <Route exact path="/" component={StationIndex} />
             <Route exact path="/estacoes/find/:id" component={StationFind} />
             <Route exact path="/estacoes/create/" component={CreateEstacao} />
             <Route exact path="/estacoes/update/:id" component={StationUpdate} /> 
