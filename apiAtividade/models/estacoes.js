@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const estacoes = sequelize.define('estacoes', {
+    const model = sequelize.define('estacoes', {
         id: {
             type: DataTypes.INTEGER(11),
             allowNull: false,
@@ -30,9 +30,9 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false
     });
 
-    estacoes.associate = models => {
-        estacoes.hasMany(models.dados);
+    model.associate = models => {
+        model.hasMany(models.dados);
     }
 
-    return estacoes;
+    return model;
 }
