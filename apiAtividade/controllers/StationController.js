@@ -17,7 +17,7 @@ module.exports = {
     async find(req, res) {
         await db.estacoes.findOne({ where: { id: req.params.id }, include: db.dados })
         .then(find => res.send(find))
-        .catch(res.send('Estação inválida ou inexistente!'))
+        .catch(err => res.send(err))
     },
 
     async update(req, res) {
@@ -30,6 +30,6 @@ module.exports = {
     async delete(req, res) {
         await db.estacoes.destroy({ where: { id: req.params.id } })
         .then(res.send('ok'))
-        .catch(re.send('Estação inválida ou inexistente!'))
+        .catch(err => res.send(err))
     }
 }
