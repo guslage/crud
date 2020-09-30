@@ -7,11 +7,11 @@ const db = require('./models');
 
 app.use(express.json());
 
-const dadoRoutes = require('./routes/dados-routes');
-app.use('/api/dados', dadoRoutes);
+const DataRoutes = require('./routes/DataRoutes');
+app.use('/api/dados', DataRoutes);
 
-const estacaoRoutes = require('./routes/estacoes-routes');
-app.use('/api/estacoes', estacaoRoutes);
+const StationRoutes = require('./routes/StationRoutes');
+app.use('/api/estacoes', StationRoutes);
 
 db.sequelize.sync().then(()=> {
     app.listen(3001, () => {
