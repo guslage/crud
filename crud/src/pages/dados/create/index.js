@@ -10,9 +10,9 @@ const darkTheme = createMuiTheme({
     },
   });
 
-export default class CreateDado extends Component {
+export default class DataCreate extends Component {
     state = {
-        dados: {
+        data: {
             temperatura: "",
             velocidade_vento: "",
             umidade: "",
@@ -22,29 +22,29 @@ export default class CreateDado extends Component {
     }
 
     render(){
-        const { dados, redirect } = this.state;
+        const { data, redirect } = this.state;
         
         if(redirect){
-            return window.location.href = `/estacoes/find/${dados.estacaoId}`
+            return window.location.href = `/estacoes/find/${data.estacaoId}`
         }else{
             return(
                 <div className="MainContainer">
                 <ThemeProvider theme={darkTheme}>    
                 <form onSubmit={this.handleSubmit} autoComplete="off">
                     <div className="Text">
-                    <TextField type="number" id="temperatura" label="Temperatura" variant="filled" defaultValue={dados.temperatura} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }} inputProps={{step: 0.1}} fullWidth={true}/>
+                    <TextField type="number" id="temperatura" label="Temperatura" variant="filled" defaultValue={data.temperatura} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }} inputProps={{step: 0.1}} fullWidth={true}/>
                     </div>
                     <div className="Text">
-                    <TextField type="number" id="velocidade_vento" label="Velocidade do vento" variant="filled" defaultValue={dados.velocidade_vento} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }} inputProps={{step: 0.1}} fullWidth={true}/>
+                    <TextField type="number" id="velocidade_vento" label="Velocidade do vento" variant="filled" defaultValue={data.velocidade_vento} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }} inputProps={{step: 0.1}} fullWidth={true}/>
                     </div>
                     <div className="Text">
-                    <TextField type="number" id="umidade" label="Umidade" variant="filled" defaultValue={dados.umidade} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }} inputProps={{step: 0.1}} fullWidth={true}/>
+                    <TextField type="number" id="umidade" label="Umidade" variant="filled" defaultValue={data.umidade} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }} inputProps={{step: 0.1}} fullWidth={true}/>
                     </div>
                     <div className="Text">
-                    <TextField id="data" label="Birthday" type="date" defaultValue={dados.data} InputLabelProps={{ shrink: true, style: { color: '#90CAF9' } }} onChange={this.handleInputChange} fullWidth={true}/>
+                    <TextField id="data" label="Birthday" type="date" defaultValue={data.data} InputLabelProps={{ shrink: true, style: { color: '#90CAF9' } }} onChange={this.handleInputChange} fullWidth={true}/>
                     </div>
                     <div className="Text">
-                    <TextField type="number" id="estacaoId" label="Estação pertencente" variant="filled" defaultValue={dados.estacaoId} InputLabelProps={{ style: { color: '#90CAF9' } }} fullWidth={true}/>
+                    <TextField type="number" id="estacaoId" label="Estação pertencente" variant="filled" defaultValue={data.estacaoId} InputLabelProps={{ style: { color: '#90CAF9' } }} fullWidth={true}/>
                     </div>
                     <Button type="submit" variant="contained" color="primary">Inserir</Button>
                 </form>  
@@ -60,14 +60,14 @@ export default class CreateDado extends Component {
         const value = target.value;
         
         this.setState(prevState => ({
-            dados: { ...prevState.dados, [name]: value }
+            data: { ...prevState.data, [name]: value }
         }))
     }
 
     handleSubmit = event => {
-        let data = JSON.stringify(this.state.dados);
+        let req = JSON.stringify(this.state.data);
         
-        api.post(`/dados/new`, data, {
+        api.post(`/dados/new`, req, {
             headers: {'content-type': 'application/json'}
         }).then(
             this.setState({redirect: true})

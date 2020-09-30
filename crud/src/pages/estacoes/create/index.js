@@ -10,17 +10,18 @@ const darkTheme = createMuiTheme({
     },
   });
 
-export default class CreateEstacao extends Component {
+export default class StationCreate extends Component {
     constructor(props){
         super(props);
         console.log('teste');
         this.state = {
-            estacoes: {}, redirect: false
+            station: {}, 
+            redirect: false
         }
     }
 
     render(){
-        const { estacoes, redirect } = this.state;
+        const { station, redirect } = this.state;
         
         if(redirect){
             return window.location.href = "/"
@@ -30,16 +31,16 @@ export default class CreateEstacao extends Component {
                 <ThemeProvider theme={darkTheme}>    
                 <form onSubmit={this.handleSubmit} autoComplete="off">
                     <div className="Text">
-                    <TextField id="serial" label="Número serial" variant="filled" value={estacoes.serial} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }} fullWidth={true}/>
+                    <TextField id="serial" label="Número serial" variant="filled" value={station.serial} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }} fullWidth={true}/>
                     </div>
                     <div className="Text">
-                    <TextField id="lat" label="Latitude" variant="filled" value={estacoes.lat} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }} fullWidth={true}/>
+                    <TextField id="lat" label="Latitude" variant="filled" value={station.lat} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }} fullWidth={true}/>
                     </div>
                     <div className="Text">    
-                    <TextField id="lon" label="Longitude" variant="filled" value={estacoes.lon} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }} fullWidth={true}/>
+                    <TextField id="lon" label="Longitude" variant="filled" value={station.lon} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }} fullWidth={true}/>
                     </div>
                     <div className="Text">
-                    <TextField id="nome" label="Nome" variant="filled" value={estacoes.nome} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }} fullWidth={true}/>
+                    <TextField id="nome" label="Nome" variant="filled" value={station.nome} onChange={this.handleInputChange} InputLabelProps={{ style: { color: '#90CAF9' } }} fullWidth={true}/>
                     </div>
                     <Button type="submit" variant="contained" color="primary">Inserir</Button>
                 </form>  
@@ -55,12 +56,12 @@ export default class CreateEstacao extends Component {
         const value = target.value;
 
         this.setState(prevState => ({
-            estacoes: { ...prevState.estacoes, [name]: value }
+            station: { ...prevState.station, [name]: value }
         }))
     }
 
     handleSubmit = event => {
-        let data = JSON.stringify(this.state.estacoes);
+        let data = JSON.stringify(this.state.station);
         api.post(`/estacoes/new`, data, {
             headers: {'content-type': 'application/json'}
         }).then(
