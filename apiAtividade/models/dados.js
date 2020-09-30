@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const model = sequelize.define('dados', {
+    const data = sequelize.define('dados', {
         id: {
             type: DataTypes.INTEGER(11),
             allowNull: false,
@@ -28,8 +28,8 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false
     });
 
-    model.associate = models => {
-        model.belongsTo(models.estacoes, {
+    data.associate = models => {
+        data.belongsTo(models.estacoes, {
             as: 'estacao',
             foreignKey: {
                 allowNull: false
@@ -38,5 +38,5 @@ module.exports = (sequelize, DataTypes) => {
         })
     }
 
-    return model;
+    return data;
 }
