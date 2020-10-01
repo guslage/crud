@@ -33,8 +33,7 @@ module.exports = (sequelize, DataTypes) => {
             as: 'estacao',
             foreignKey: {
                 allowNull: false
-            },
-            onDelete: 'CASCADE'
+            }
         })
     }
 
