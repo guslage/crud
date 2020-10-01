@@ -60,9 +60,9 @@ export default class StationCreate extends Component {
         }))
     }
 
-    handleSubmit = event => {
+    handleSubmit = async event => {
         let data = JSON.stringify(this.state.station);
-        api.post(`/station/new`, data, {
+        await api.post(`/station/new`, data, {
             headers: {'content-type': 'application/json'}
         }).then(
             this.setState({redirect: true})
