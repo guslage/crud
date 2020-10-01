@@ -29,6 +29,13 @@ module.exports = {
 
     async delete(req, res) {
         await db.estacoes.destroy({ where: { id: req.params.id } })
+        .then(await db.dados.destroy({where: {estacaoId: req.params.id}}))
+        .then(res.send('ok'))
+        .catch(err => res.send(err))
+    },
+
+    async deleteData(req, res){
+        await db.dados.destroy({where: {estacaoId: req.params.id}})
         .then(res.send('ok'))
         .catch(err => res.send(err))
     }
