@@ -20,6 +20,12 @@ module.exports = {
         .catch(err => res.send(err))
     },
 
+    async findStation(req, res){
+        await db.dados.findAll({ where: { estacaoId: req.params.station} })
+        .then(find => res.send(find))
+        .catch(err => res.send(err))
+    },
+
     async update(req, res) {
         const { temperatura, velocidade_vento, umidade, data, estacaoId } = req.body;
         await db.dados.update({ temperatura, velocidade_vento, umidade, data, estacaoId }, { where: { id: req.params.id } })
