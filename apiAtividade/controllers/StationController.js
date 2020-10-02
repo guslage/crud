@@ -15,7 +15,7 @@ module.exports = {
     },
 
     async find(req, res) {
-        await db.estacoes.findOne({ where: { id: req.params.id }, include: db.dados })
+        await db.estacoes.findAll({ where: { id: req.params.id } })
         .then(find => res.send(find))
         .catch(err => res.send(err))
     },
