@@ -20,7 +20,6 @@ export default class StationIndex extends Component {
 
     render(){
         const { station } = this.state;
-
         const header = ['#', 'Número serial', 'Latitude', 'Longitude', 'Nome'];
 
         return (
