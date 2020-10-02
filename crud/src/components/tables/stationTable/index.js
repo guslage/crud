@@ -4,7 +4,7 @@ import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody
 const darkTheme = createMuiTheme({
     palette: {
       type: 'dark',
-    },
+    }
 });
 
 const Head = ({ keys, data, op }) => {
@@ -15,8 +15,7 @@ const Head = ({ keys, data, op }) => {
             return(
             <TableCell key={keys} align="center">{keys}</TableCell>
             )})
-        }    
-        {
+        }{
             op === 'OP_LIST_STATION' ? <TableCell align="center"><Button variant="contained" size="small" color="primary" href={'/estacoes/create'}>Cadastrar estação</Button></TableCell>
             :<TableCell></TableCell>
         }
