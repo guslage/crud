@@ -21,7 +21,7 @@ module.exports = {
     },
 
     async findStation(req, res){
-        await db.dados.findAll({ where: { estacaoId: req.params.station} })
+        await db.dados.findAndCountAll({ where: { estacaoId: req.params.station} })
         .then(find => res.send(find))
         .catch(err => res.send(err))
     },

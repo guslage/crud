@@ -9,7 +9,7 @@ module.exports = {
     },
 
     async index(req, res) { 
-        await db.estacoes.findAll()
+        await db.estacoes.findAndCountAll()
         .then(index => res.send(index))
         .catch(err => res.send(err))
     },
