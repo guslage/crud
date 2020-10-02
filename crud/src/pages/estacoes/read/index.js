@@ -1,12 +1,14 @@
 import React, { Component} from 'react';
 import api from '../../../services/api';
-import TableList from '../../../components/tables/stationTable/index';
+import TableList from '../../../components/tables/index';
+import Empty from '../../../components/empty';
 
 import '../../style.css';
 
 export default class StationIndex extends Component {
     state = {
-        station: []
+        station: [],
+        stationCount: ''
     }
 
     componentDidMount(){
@@ -15,17 +17,17 @@ export default class StationIndex extends Component {
 
     loadList = async () => {
         const response = await api.get('/station/index');
-        this.setState({ station: response.data });
+        this.setState({ station: response.data.rows, stationCount: response.data.count });
     }
 
     render(){
-        const { station } = this.state;
-        const header = ['#', 'Número serial', 'Latitude', 'Longitude', 'Nome'];
+        const { station, stationCount } = this.state;
 
         return (
-        <div className="MainContainer">
-            <TableList data={station} head={header} op={'OP_LIST_STATION'}/>
-        </div>
+            <div className="MainContainer">{
+                stationCount > 0 ? <TableList data={station} op={'OP_CREATE_STATION'}/>
+                :<Empty type={'station'}/>
+            }</div>
         )
     }
 }
