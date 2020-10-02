@@ -12,7 +12,7 @@ const darkTheme = createMuiTheme({
 
 export default class StationFind extends Component {
     state = {
-        station: [] ,
+        station: [],
         data: []
     }
 
@@ -23,7 +23,8 @@ export default class StationFind extends Component {
     loadList = async () => {
         const { id } = this.props.match.params;
         const response = await api.get(`/station/find/${id}`);
-        this.setState({ station: response.data, data: response.data.dados});  
+        const responseData = await api.get(`/data/findStation/${id}`)
+        this.setState({ station: response.data[0], data: responseData.data});  
     }
 
     async DeleteStation(id){
@@ -38,7 +39,8 @@ export default class StationFind extends Component {
 
     render(){
         const { station, data } = this.state;
-        console.log(station);
+        
+        
         return (
         <div>    
         <div className="MainContainer">{
